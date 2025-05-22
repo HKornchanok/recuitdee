@@ -1,11 +1,6 @@
 # Add files here to ignore them from prettier formatting
 /dist
 /coverage
-.angular
-/apps
-/node_modules
-libs/cb/api/src/lib/types.ts
-
-
 /.nx/cache
 /.nx/workspace-data
+.angular
