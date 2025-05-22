@@ -2,7 +2,11 @@
   "name": "@frontend/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~19.2.0",
@@ -53,5 +57,8 @@
     "tslib": "^2.3.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.19.0"
+  },
+  "nx": {
+    "includedScripts": []
   }
 }

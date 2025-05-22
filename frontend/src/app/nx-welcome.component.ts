@@ -742,7 +742,7 @@ import { CommonModule } from '@angular/common';
               <p>Your Nx Cloud remote cache setup is almost complete.</p>
 
               <a
-                href="https://cloud.nx.app/connect/OplqYavN07"
+                href="https://cloud.nx.app/connect/kP1s2XlZCJ"
                 target="_blank"
                 rel="noreferrer"
               >

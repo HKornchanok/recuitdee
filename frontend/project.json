@@ -1,28 +1,29 @@
 {
   "name": "frontend",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "includedScripts": [],
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/frontend/src",
+  "sourceRoot": "./src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/frontend",
-        "index": "apps/frontend/src/index.html",
-        "browser": "apps/frontend/src/main.ts",
+        "outputPath": "dist/frontend",
+        "index": "./src/index.html",
+        "browser": "./src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/frontend/tsconfig.app.json",
+        "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/frontend/public"
+            "input": "public"
           }
         ],
-        "styles": ["apps/frontend/src/styles.scss"],
+        "styles": ["./src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -69,13 +70,16 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["./src"]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
       "options": {
-        "jestConfig": "apps/frontend/jest.config.ts"
+        "jestConfig": "jest.config.ts"
       }
     },
     "serve-static": {
@@ -84,7 +88,7 @@
       "options": {
         "buildTarget": "frontend:build",
         "port": 4200,
-        "staticFilePath": "dist/apps/frontend/browser",
+        "staticFilePath": "dist/frontend/browser",
         "spa": true
       }
     }
