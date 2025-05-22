@@ -5,7 +5,12 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "npm run test:affected",
+    "test:all": "jest",
+    "test:affected": "jest --changedSince=develop --coverage",
+    "lint": "nx run-many --target=lint --all --parallel",
+    "lint:affected": "nx affected:lint --base=develop --head=HEAD --parallel",
+    "format": "nx format:write"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +27,7 @@
     "@ngrx/router-store": "^19.0.0",
     "@ngrx/store": "^19.0.0",
     "@ngrx/store-devtools": "^19.2.0",
+    "@tailwindcss/postcss": "^4.1.7",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"
   },
@@ -50,6 +56,7 @@
     "@types/node": "18.16.9",
     "@typescript-eslint/utils": "^8.19.0",
     "angular-eslint": "^19.2.0",
+    "autoprefixer": "^10.4.21",
     "cypress": "^14.2.1",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
@@ -59,7 +66,9 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "~14.4.0",
     "nx": "21.1.1",
+    "postcss": "^8.5.3",
     "prettier": "^2.6.2",
+    "tailwindcss": "^4.1.7",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
