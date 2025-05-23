@@ -19,6 +19,7 @@
       "@frontend/feature-auth": ["libs/auth/feature-auth/src/index.ts"],
       "@frontend/feature-shell": ["libs/shell/feature-shell/src/index.ts"],
       "@frontend/tabs": ["libs/tabs/src/index.ts"],
+      "@frontend/theme": ["libs/theme/src/index.ts"],
       "@frontend/ui": ["libs/ui/src/index.ts"]
     }
   },
