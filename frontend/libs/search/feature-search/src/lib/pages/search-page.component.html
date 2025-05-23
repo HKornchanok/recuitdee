@@ -1,0 +1,15 @@
+<section>
+  <h1>Search</h1>
+  <button (click)="getCharacters()">Get Characters</button>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div *ngFor="let character of characters" class="card-section">
+      <h2>{{ character.name }}</h2>
+      <img [src]="character.image" alt="Character Image" />
+      <p>{{ character.status }}</p>
+      <p>{{ character.species }}</p>
+      <p>{{ character.gender }}</p>
+      <p>{{ character.origin.name }}</p>
+      <p>{{ character.location.name }}</p>
+    </div>
+  </div>
+</section>

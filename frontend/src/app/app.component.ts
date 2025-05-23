@@ -13,5 +13,6 @@ export class AppComponent {
 
   constructor(private readonly authFacade: AuthFacade) {
     this.authFacade.init();
+    console.log(localStorage.getItem("token"));
   }
 }

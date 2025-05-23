@@ -9,8 +9,20 @@ const routes: Routes = [
     component: TabPageComponent,
     children: [
       {
-        path: "",
-        redirectTo: "",
+        path: "search",
+        loadChildren: () => import("@frontend/feature-search").then((m) => m.FeatureSearchModule), 
+      },
+      {
+        path: "favorite",
+        loadChildren: () => import("@frontend/feature-favorite").then((m) => m.FeatureFavoriteModule),
+      },
+      {
+        path: "settings",
+        loadChildren: () => import("@frontend/feature-settings").then((m) => m.FeatureSettingsModule),
+      },
+      {
+        path: "**",
+        redirectTo: "search",
         pathMatch: "full",
       },
     ],

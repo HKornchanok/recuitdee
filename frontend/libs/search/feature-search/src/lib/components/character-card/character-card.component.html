@@ -1,0 +1,17 @@
+<div class="character-card">
+  <div class="character-image">
+    <img [src]="character.image" [alt]="character.name">
+    <div class="status-badge" [class]="character.status.toLowerCase()">
+      {{ character.status }}
+    </div>
+  </div>
+  <div class="character-info">
+    <h3 class="character-name">{{ character.name }}</h3>
+    <div class="character-details">
+      <p><strong>Species:</strong> {{ character.species }}</p>
+      <p><strong>Gender:</strong> {{ character.gender }}</p>
+      <p><strong>Origin:</strong> {{ character.origin.name }}</p>
+      <p><strong>Location:</strong> {{ character.location.name }}</p>
+    </div>
+  </div>
+</div> 
