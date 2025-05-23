@@ -8,7 +8,6 @@ const THEME_KEY = 'theme-preference';
 export class ThemeService {
   public getStoredTheme(): boolean {
     const stored = localStorage.getItem(THEME_KEY);
-    console.log('stored', stored);
     return stored === 'dark' ? true : false;
   }
 
@@ -25,7 +24,6 @@ export class ThemeService {
   }
   
   public toggleTheme(isDarkMode: boolean): boolean {
-    console.log('isDarkMode', isDarkMode);
     const newIsDarkMode = !isDarkMode;
     if (newIsDarkMode) {
       document.documentElement.classList.add("dark");

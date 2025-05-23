@@ -1,0 +1,77 @@
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="space-y-6 rounded-2xl w-full max-w-md mx-auto">
+      
+      <h2 class="text-xl sm:text-2xl font-semibold text-center text-gray-800 dark:text-gray-100 mb-4">Create Your Account</h2>
+  
+      <!-- Username Field -->
+      <div class="space-y-2">
+        <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          autocomplete="username"
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+          placeholder="Enter your username"
+        />
+        <div *ngIf="signUpForm.get('username')?.touched && signUpForm.get('username')?.errors?.['required']" class="text-red-500 text-sm">
+          Username is required
+        </div>
+      </div>
+
+      <!-- First Name Field -->
+      <div class="space-y-2">
+        <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          autocomplete="given-name"
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+          placeholder="Enter your first name"
+        />
+        <div *ngIf="signUpForm.get('firstName')?.touched && signUpForm.get('firstName')?.errors?.['required']" class="text-red-500 text-sm">
+          First name is required
+        </div>
+      </div>
+
+      <!-- Last Name Field -->
+      <div class="space-y-2">
+        <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          formControlName="lastName"
+          autocomplete="family-name"
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+          placeholder="Enter your last name"
+        />
+        <div *ngIf="signUpForm.get('lastName')?.touched && signUpForm.get('lastName')?.errors?.['required']" class="text-red-500 text-sm">
+          Last name is required
+        </div>
+      </div>
+  
+      <!-- Password Field -->
+      <div class="space-y-2">
+        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          autocomplete="new-password"
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+          placeholder="Enter your password"
+        />
+        <div *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors?.['required']" class="text-red-500 text-sm">
+          Password is required
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="signUpForm.invalid"
+        class="w-full py-2.5 text-white bg-primary rounded-xl font-semibold text-sm sm:text-base hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
+      >
+        Sign Up
+      </button>
+    </form>

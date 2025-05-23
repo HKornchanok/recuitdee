@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@frontend/auth-data-access": ["libs/auth/auth-data-access/src/index.ts"],
+      "@frontend/core": ["libs/core/src/index.ts"],
       "@frontend/feature-auth": ["libs/auth/feature-auth/src/index.ts"],
       "@frontend/feature-shell": ["libs/shell/feature-shell/src/index.ts"],
       "@frontend/tabs": ["libs/tabs/src/index.ts"],

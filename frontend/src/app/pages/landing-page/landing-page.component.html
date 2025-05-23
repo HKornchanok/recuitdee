@@ -3,7 +3,12 @@
     <lib-theme-switcher></lib-theme-switcher>
     <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 shadow-lg">
       <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-        Hello world!
+        <ng-container *ngIf="user; else welcomeMessage">
+          Hello {{ user.firstName }}!
+        </ng-container>
+        <ng-template #welcomeMessage>
+          Welcome to our platform!
+        </ng-template>
       </h2>
       <button
         (click)="navigateToSecondPage()"

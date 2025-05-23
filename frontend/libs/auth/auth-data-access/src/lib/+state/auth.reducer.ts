@@ -7,10 +7,25 @@ export const authFeature = createFeature({
   name: "auth",
   reducer: createReducer(
     initialAuthState,
-    on(AuthActions.loginSuccess, (state, {user}) => ({
+    on(AuthActions.loginSuccess, (state, {user, token}) => ({
       ...state,
       isAuthenticated: true,
-      user,
+      user: {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+      token: token,
+    })),
+    on(AuthActions.signUpSuccess, (state, {user, token}) => ({
+      ...state,
+      isAuthenticated: true,
+      user: {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+      token: token,
     })),
     on(AuthActions.logout, () => ({
       ...initialAuthState,

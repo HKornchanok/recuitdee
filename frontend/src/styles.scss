@@ -111,4 +111,13 @@
   .button {
     @apply bg-card p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-primary transition-colors border border-border;
   }
+
+  .page-content {
+    @apply  bg-background flex flex-col items-center  h-screen p-4;
+  }
+
+  .card-section {
+    @apply flex flex-col items-center border border-border rounded-lg p-4 m-4 w-full ;
+  }
+
 }
