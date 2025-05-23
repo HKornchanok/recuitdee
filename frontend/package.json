@@ -28,6 +28,7 @@
     "@ngrx/store": "^19.0.0",
     "@ngrx/store-devtools": "^19.2.0",
     "@tailwindcss/postcss": "^4.1.7",
+    "ionicons": "^8.0.8",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"
   },

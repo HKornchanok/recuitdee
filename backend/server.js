@@ -26,16 +26,14 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// Enable CORS for all routes
 app.use(cors({
-  origin: 'http://localhost:4200', // Your frontend URL
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(bodyParser.json());
 
-// New auth route to verify and refresh token
 app.post('/auth', (req, res) => {
   const { token } = req.body;
 
@@ -48,17 +46,16 @@ app.post('/auth', (req, res) => {
       return res.status(403).json({ message: 'Invalid or expired token' });
     }
 
-    // Verify user still exists and password matches
-    const { username, password } = decoded;
-    if (!users[username] || users[username].password !== password) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+    const { username } = decoded;
+    if (!users[username] || users[username].currentToken !== token) {
+      return res.status(401).json({ message: 'Invalid token' });
     }
 
-    // Remove exp and iat from the decoded token
     const { exp, iat, ...userData } = decoded;
 
-    // Generate new token with fresh expiration
     const refreshedToken = jwt.sign(userData, JWT_SECRET, { expiresIn: '1h' });
+    
+    users[username].currentToken = refreshedToken;
 
     res.json({
       user: {
@@ -82,14 +79,15 @@ app.post('/register', (req, res) => {
     return res.status(400).json({ message: 'User already exists' });
   }
 
+  const user = { username, password, firstName, lastName };
+  const token = jwt.sign({ username, firstName, lastName }, JWT_SECRET, { expiresIn: '1h' });
+
   users[username] = {
     password,
     firstName,
-    lastName
+    lastName,
+    currentToken: token
   };
-
-  const user = { username, password, firstName, lastName };
-  const token = jwt.sign(user, JWT_SECRET, { expiresIn: '1h' });
 
   res.status(201).json({ 
     message: 'User registered successfully',
@@ -109,7 +107,9 @@ app.post('/login', (req, res) => {
     const { firstName, lastName } = users[username];
     const user = { username, password, firstName, lastName };
     
-    const token = jwt.sign(user, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username, firstName, lastName }, JWT_SECRET, { expiresIn: '1h' });
+    
+    users[username].currentToken = token;
     
     return res.json({ 
       message: 'Login successful',
