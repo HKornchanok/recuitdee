@@ -9,6 +9,7 @@ import {CommonModule} from "@angular/common";
   templateUrl: "./auth-page.component.html",
 })
 export class AuthPageComponent {
+
   constructor(
     private router: Router,
   ) {}
