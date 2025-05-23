@@ -5,11 +5,10 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = 3000;
-const JWT_SECRET = 'your-secret-key'; // In production, use environment variable
+const JWT_SECRET = 'howl@kornchanok.dev'; 
 
 const users = {};
 
-// Middleware to verify JWT token
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -49,6 +48,12 @@ app.post('/auth', (req, res) => {
       return res.status(403).json({ message: 'Invalid or expired token' });
     }
 
+    // Verify user still exists and password matches
+    const { username, password } = decoded;
+    if (!users[username] || users[username].password !== password) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
     // Remove exp and iat from the decoded token
     const { exp, iat, ...userData } = decoded;
 
@@ -56,7 +61,11 @@ app.post('/auth', (req, res) => {
     const refreshedToken = jwt.sign(userData, JWT_SECRET, { expiresIn: '1h' });
 
     res.json({
-      user: userData,
+      user: {
+        username: userData.username,
+        firstName: users[username].firstName,
+        lastName: users[username].lastName
+      },
       token: refreshedToken
     });
   });
@@ -79,12 +88,16 @@ app.post('/register', (req, res) => {
     lastName
   };
 
-  const user = { username, firstName, lastName };
+  const user = { username, password, firstName, lastName };
   const token = jwt.sign(user, JWT_SECRET, { expiresIn: '1h' });
 
   res.status(201).json({ 
     message: 'User registered successfully',
-    user,
+    user: {
+      username,
+      firstName,
+      lastName
+    },
     token
   });
 });
@@ -94,14 +107,17 @@ app.post('/login', (req, res) => {
 
   if (users[username] && users[username].password === password) {
     const { firstName, lastName } = users[username];
-    const user = { username, firstName, lastName };
+    const user = { username, password, firstName, lastName };
     
-    // Generate JWT token
     const token = jwt.sign(user, JWT_SECRET, { expiresIn: '1h' });
     
     return res.json({ 
       message: 'Login successful',
-      user,
+      user: {
+        username,
+        firstName,
+        lastName
+      },
       token
     });
   }
@@ -109,7 +125,6 @@ app.post('/login', (req, res) => {
   res.status(401).json({ message: 'Invalid username or password' });
 });
 
-// Protected route example
 app.get('/profile', authenticateToken, (req, res) => {
   res.json({ user: req.user });
 });

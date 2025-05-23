@@ -24,11 +24,9 @@ export class AuthEffects {
         }
         return from(this.authService.verifyAndRefreshToken(token)).pipe(
           map(({ user, token }) => {
-            console.log('Token verification successful', { user, token });
             return AuthActions.loginSuccess({ user, token });
           }),
-          catchError((error: HttpErrorResponse) => {
-            console.error('Token verification failed:', error);
+          catchError(() => {
             sessionStorage.removeItem('token');
             return of(AuthActions.logout());
           })
