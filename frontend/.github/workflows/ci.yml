@@ -5,12 +5,14 @@ on:
     branches:
       - main
   pull_request:
+    types: [opened, synchronize, reopened]
     branches:
       - main
 
 permissions:
   actions: read
   contents: read
+  pull-requests: write
 
 jobs:
   main:
@@ -40,20 +42,24 @@ jobs:
 
       # Lint
       - name: Lint
+        id: lint
         run: npx nx affected -t lint
         continue-on-error: true
 
       # Test
       - name: Test
+        id: test
         run: npx nx affected -t test
         continue-on-error: true
 
       # Build
       - name: Build
+        id: build
         run: npx nx affected -t build
 
       # E2E Tests
       - name: E2E Tests
+        id: e2e
         run: npx nx affected -t e2e
         continue-on-error: true
 
@@ -77,3 +83,31 @@ jobs:
           key: ${{ runner.os }}-build-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-build-
+
+      # Update PR status
+      - name: Update PR Status
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const statuses = {
+              lint: process.env.LINT_STATUS === '0' ? 'success' : 'failure',
+              test: process.env.TEST_STATUS === '0' ? 'success' : 'failure',
+              build: process.env.BUILD_STATUS === '0' ? 'success' : 'failure',
+              e2e: process.env.E2E_STATUS === '0' ? 'success' : 'failure'
+            };
+            
+            const summary = `
+            ## CI Status
+            - Lint: ${statuses.lint === 'success' ? '✅' : '❌'}
+            - Test: ${statuses.test === 'success' ? '✅' : '❌'}
+            - Build: ${statuses.build === 'success' ? '✅' : '❌'}
+            - E2E: ${statuses.e2e === 'success' ? '✅' : '❌'}
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });
