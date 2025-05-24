@@ -70,7 +70,6 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    console.log("ngOnDestroy");
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -90,7 +89,6 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   public async onSearch(): Promise<void> {
-    console.log("onSearch");
     this.searchFacade.updateFilter({
       searchQuery: this.searchQuery,
       gender: this.selectedGender,
@@ -100,7 +98,6 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   public async onFilterChange(): Promise<void> {
-    console.log("onFilterChange");
     this.searchFacade.updateFilter({
       searchQuery: this.searchQuery,
       gender: this.selectedGender,

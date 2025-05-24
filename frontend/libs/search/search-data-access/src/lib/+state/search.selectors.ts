@@ -1,4 +1,4 @@
-import {createFeatureSelector, createSelector} from "@ngrx/store";
+import {createFeatureSelector} from "@ngrx/store";
 import {
   searchFeatureKey,
   characterAdapter,

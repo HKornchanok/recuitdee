@@ -63,8 +63,6 @@ export class CharacterService {
         )
       );
 
-      console.log(response);
-
       return {
         pagination: {
           count: response.info.count,
