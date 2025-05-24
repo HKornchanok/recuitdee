@@ -6,15 +6,16 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
 } from "@angular/core";
 import {
-  CharacterService,
   Character,
   CharacterPagination,
+  SearchState,
 } from "@frontend/search-data-access";
 import {InfiniteScrollDirective} from "ngx-infinite-scroll";
 import {CharacterCardComponent} from "../components/character-card/character-card.component";
 import {FormsModule} from "@angular/forms";
 import {FilterComponent} from "../components/filter/filter.component";
-
+import {SearchFacade} from "@frontend/search-data-access";
+import {Subject, takeUntil} from "rxjs";
 @Component({
   selector: "lib-search-page",
   templateUrl: "./search-page.component.html",
@@ -30,7 +31,9 @@ import {FilterComponent} from "../components/filter/filter.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SearchPageComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   public characters: Character[] = [];
+  public state!: SearchState;
   public pagination: CharacterPagination = {
     count: 0,
     pages: 0,
@@ -48,72 +51,38 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   public selectedStatus = "";
   public showScrollTop = false;
 
-  constructor(private readonly characterService: CharacterService) {}
+  constructor(private readonly searchFacade: SearchFacade) {}
 
   public ngOnInit(): void {
-    this.getCharacters();
-    this.setupScrollListener();
+    this.searchFacade.loadCharacters(this.pagination, true);
+    this.searchFacade.results$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((results) => {
+        this.characters = results;
+      });
+    this.searchFacade.state$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((state) => {
+        this.state = state;
+        this.pagination = state.pagination;
+        this.loading = state.loading;
+      });
   }
 
   public ngOnDestroy(): void {
-    this.removeScrollListener();
-  }
-
-  private setupScrollListener(): void {
-    const scrollContainer = document.querySelector(".overflow-y-auto");
-    if (scrollContainer) {
-      scrollContainer.addEventListener("scroll", this.handleScroll.bind(this));
-    }
-  }
-
-  private removeScrollListener(): void {
-    const scrollContainer = document.querySelector(".overflow-y-auto");
-    if (scrollContainer) {
-      scrollContainer.removeEventListener(
-        "scroll",
-        this.handleScroll.bind(this)
-      );
-    }
-  }
-
-  private handleScroll(): void {
-    const scrollContainer = document.querySelector(".overflow-y-auto");
-    if (scrollContainer) {
-      this.showScrollTop = scrollContainer.scrollTop > 100;
-    }
+    console.log("ngOnDestroy");
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public onScroll(): void {
-    this.handleScroll();
-
     if (this.pagination.next) {
       this.loadMoreCharacters();
     }
   }
 
-  public async getCharacters(): Promise<void> {
-    const results = await this.characterService.getCharacters(
-      this.pagination,
-      true
-    );
-    this.characters = results.results;
-    this.pagination = results.pagination;
-  }
-
-  public scrollToTop(): void {
-    const scrollContainer = document.querySelector(".overflow-y-auto");
-    if (scrollContainer) {
-      scrollContainer.scrollTo({top: 0, behavior: "smooth"});
-      setTimeout(() => {
-        this.showScrollTop = false;
-      }, 500);
-    }
-  }
-
   private async loadMoreCharacters(): Promise<void> {
-    const results = await this.characterService.getCharacters(this.pagination);
-    this.characters = [...this.characters, ...results.results];
-    this.pagination = results.pagination;
+    this.searchFacade.loadCharacters(this.pagination, false);
   }
 
   public trackByFn(index: number, character: Character): string {
@@ -121,25 +90,22 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   public async onSearch(): Promise<void> {
-    this.scrollToTop();
-    this.pagination.filter.searchQuery = this.searchQuery;
-    const results = await this.characterService.getCharacters(
-      this.pagination,
-      true
-    );
-    this.characters = results.results;
-    this.pagination = results.pagination;
+    console.log("onSearch");
+    this.searchFacade.updateFilter({
+      searchQuery: this.searchQuery,
+      gender: this.selectedGender,
+      status: this.selectedStatus,
+    });
+    this.searchFacade.loadCharacters(this.pagination, true);
   }
 
   public async onFilterChange(): Promise<void> {
-    this.scrollToTop();
-    this.pagination.filter.gender = this.selectedGender;
-    this.pagination.filter.status = this.selectedStatus;
-    const results = await this.characterService.getCharacters(
-      this.pagination,
-      true
-    );
-    this.characters = results.results;
-    this.pagination = results.pagination;
+    console.log("onFilterChange");
+    this.searchFacade.updateFilter({
+      searchQuery: this.searchQuery,
+      gender: this.selectedGender,
+      status: this.selectedStatus,
+    });
+    this.searchFacade.loadCharacters(this.pagination, true);
   }
 }

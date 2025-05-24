@@ -8,13 +8,11 @@ import {appRoutes} from "./app.routes";
 import {provideStore} from "@ngrx/store";
 import {provideEffects} from "@ngrx/effects";
 import {provideStoreDevtools} from "@ngrx/store-devtools";
-import {authFeature} from "@frontend/auth-data-access";
 import {themeFeature} from "@frontend/theme";
 import {ThemeEffects} from "@frontend/theme";
 import {APP_CONFIG} from "@frontend/core";
 import {environment} from "../environments/environment";
-import { provideHttpClient } from "@angular/common/http";
-import { AuthEffects } from "@frontend/auth-data-access";
+import {provideHttpClient} from "@angular/common/http";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,10 +21,9 @@ export const appConfig: ApplicationConfig = {
       useValue: environment,
     },
     provideStore({
-      [authFeature.name]: authFeature.reducer,
       [themeFeature.name]: themeFeature.reducer,
     }),
-    provideEffects([ThemeEffects, AuthEffects]),
+    provideEffects([ThemeEffects]),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(appRoutes),
     provideHttpClient(),

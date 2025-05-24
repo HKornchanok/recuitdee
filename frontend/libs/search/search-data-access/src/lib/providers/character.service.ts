@@ -27,14 +27,14 @@ export class CharacterService {
     pagination: CharacterPagination,
     refresh = false
   ): Promise<CharacterResults> {
+    let next = pagination.next;
     try {
       if (refresh) {
-        pagination.next = "";
+        next = "";
       }
-
-      if (pagination.next && pagination.next !== '') {
+      if (next && next !== "") {
         const response = await lastValueFrom(
-          this.http.get<CharacterResponse>(pagination.next)
+          this.http.get<CharacterResponse>(next)
         );
         return {
           results: response.results,
@@ -45,7 +45,7 @@ export class CharacterService {
           },
         };
       }
-      
+
       const queryParams = new URLSearchParams();
       if (pagination.filter.searchQuery) {
         queryParams.set("name", pagination.filter.searchQuery);
@@ -56,12 +56,15 @@ export class CharacterService {
       if (pagination.filter.status) {
         queryParams.set("status", pagination.filter.status);
       }
-      
+
       const response = await lastValueFrom(
         this.http.get<CharacterResponse>(
           `https://rickandmortyapi.com/api/character?${queryParams.toString()}`
         )
       );
+
+      console.log(response);
+
       return {
         pagination: {
           count: response.info.count,
