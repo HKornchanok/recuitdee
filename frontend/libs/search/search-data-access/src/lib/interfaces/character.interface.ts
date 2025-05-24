@@ -1,3 +1,5 @@
+import {EntityState} from "@ngrx/entity";
+
 export interface CharacterResponse {
   info: CharacterInfo;
   results: Character[];

@@ -28,7 +28,6 @@ export class AuthPageComponent implements OnDestroy {
   }
 
   public goBack(): void {
-    console.log(this.returnUrl);
     this.router.navigate([this.returnUrl]);
   }
 
