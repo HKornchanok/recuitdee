@@ -3,7 +3,7 @@ import {
   Character,
   CharacterFilter,
   CharacterPagination,
-} from "../interfaces/character.interface";
+} from "../../interfaces/character.interface";
 import {loadCharacters, updateFilter} from "./search.actions";
 import {Injectable} from "@angular/core";
 import {selectSearchResults, selectSearchState} from "./search.selectors";

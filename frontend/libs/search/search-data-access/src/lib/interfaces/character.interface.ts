@@ -1,5 +1,3 @@
-import {EntityState} from "@ngrx/entity";
-
 export interface CharacterResponse {
   info: CharacterInfo;
   results: Character[];
@@ -12,18 +10,17 @@ export interface Character {
   species: string;
   type: string;
   gender: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
+  origin: Location;
+  location: Location;
   image: string;
   episode: string[];
   url: string;
   created: string;
+}
+
+export interface Location {
+  name: string;
+  url: string;
 }
 
 export interface CharacterFilter {
