@@ -1,5 +1,10 @@
 import {CommonModule} from "@angular/common";
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from "@angular/core";
 import {
   CharacterService,
   Character,
@@ -22,6 +27,7 @@ import {FilterComponent} from "../components/filter/filter.component";
     FormsModule,
     FilterComponent,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SearchPageComponent implements OnInit, OnDestroy {
   public characters: Character[] = [];
@@ -54,21 +60,24 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   private setupScrollListener(): void {
-    const scrollContainer = document.querySelector('.overflow-y-auto');
+    const scrollContainer = document.querySelector(".overflow-y-auto");
     if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', this.handleScroll.bind(this));
+      scrollContainer.addEventListener("scroll", this.handleScroll.bind(this));
     }
   }
 
   private removeScrollListener(): void {
-    const scrollContainer = document.querySelector('.overflow-y-auto');
+    const scrollContainer = document.querySelector(".overflow-y-auto");
     if (scrollContainer) {
-      scrollContainer.removeEventListener('scroll', this.handleScroll.bind(this));
+      scrollContainer.removeEventListener(
+        "scroll",
+        this.handleScroll.bind(this)
+      );
     }
   }
 
   private handleScroll(): void {
-    const scrollContainer = document.querySelector('.overflow-y-auto');
+    const scrollContainer = document.querySelector(".overflow-y-auto");
     if (scrollContainer) {
       this.showScrollTop = scrollContainer.scrollTop > 100;
     }
@@ -76,22 +85,25 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   public onScroll(): void {
     this.handleScroll();
-    
+
     if (this.pagination.next) {
       this.loadMoreCharacters();
     }
   }
 
   public async getCharacters(): Promise<void> {
-    const results = await this.characterService.getCharacters(this.pagination, true);
+    const results = await this.characterService.getCharacters(
+      this.pagination,
+      true
+    );
     this.characters = results.results;
     this.pagination = results.pagination;
   }
 
   public scrollToTop(): void {
-    const scrollContainer = document.querySelector('.overflow-y-auto');
+    const scrollContainer = document.querySelector(".overflow-y-auto");
     if (scrollContainer) {
-      scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollContainer.scrollTo({top: 0, behavior: "smooth"});
       setTimeout(() => {
         this.showScrollTop = false;
       }, 500);
@@ -111,7 +123,10 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   public async onSearch(): Promise<void> {
     this.scrollToTop();
     this.pagination.filter.searchQuery = this.searchQuery;
-    const results = await this.characterService.getCharacters(this.pagination, true);
+    const results = await this.characterService.getCharacters(
+      this.pagination,
+      true
+    );
     this.characters = results.results;
     this.pagination = results.pagination;
   }
@@ -120,9 +135,11 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     this.scrollToTop();
     this.pagination.filter.gender = this.selectedGender;
     this.pagination.filter.status = this.selectedStatus;
-    const results = await this.characterService.getCharacters(this.pagination, true);
+    const results = await this.characterService.getCharacters(
+      this.pagination,
+      true
+    );
     this.characters = results.results;
     this.pagination = results.pagination;
   }
-
 }

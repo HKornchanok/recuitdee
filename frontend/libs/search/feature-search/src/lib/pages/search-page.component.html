@@ -1,54 +1,66 @@
 <section class="text-foreground">
-    <div class="mb-4 space-y-4">
-      <input
-        type="text"
-        placeholder="Search characters..."
-        class="w-full px-4 py-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-        [(ngModel)]="searchQuery"
-        (input)="onSearch()"
-      />
-      <lib-filter
-        [(selectedGender)]="selectedGender"
-        [(selectedStatus)]="selectedStatus"
-        (filterChange)="onFilterChange()"
-      ></lib-filter>
-    </div>
-  
-    <div *ngIf="!loading && pagination.count > 0" class="text-sm text-gray-500 mb-2">
-      {{ pagination.count }} characters found
-    </div>
-  
-  
-    <!-- Scrollable wrapper -->
-    <div 
-      class="overflow-y-auto max-h-[100vh] pb-99 scrollbar-hide relative"
-      infiniteScroll
-      [infiniteScrollDistance]="scrollDistance"
-      [infiniteScrollThrottle]="throttle"
-      (scrolled)="onScroll()"
-      [scrollWindow]="false"
+  <div class="mb-4 space-y-4">
+    <input
+      type="text"
+      placeholder="Search characters..."
+      class="w-full px-4 py-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+    />
+    <lib-filter
+      [(selectedGender)]="selectedGender"
+      [(selectedStatus)]="selectedStatus"
+      (filterChange)="onFilterChange()"
+    ></lib-filter>
+  </div>
+
+  <div
+    *ngIf="!loading && pagination.count > 0"
+    class="text-sm text-gray-500 mb-2"
+  >
+    {{ pagination.count }} characters found
+  </div>
+
+  <!-- Scrollable wrapper -->
+  <div
+    class="overflow-y-auto max-h-[100vh] pb-60 scrollbar-hide relative"
+    infiniteScroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScroll()"
+    [scrollWindow]="false"
+  >
+    <button
+      *ngIf="showScrollTop"
+      (click)="scrollToTop()"
+      class="fixed bottom-18 left-1/2 -translate-x-1/2 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-white hover:text-primary transition-all duration-200 z-10 flex items-center justify-center"
+      aria-label="Scroll to top"
     >
-      <button 
-        *ngIf="showScrollTop"
-        (click)="scrollToTop()"
-        class="fixed bottom-18 left-1/2 -translate-x-1/2 bg-primary text-white p-2 rounded-full shadow-lg hover:bg-primary/90 transition-all duration-200 z-10"
-        aria-label="Scroll to top"
-      >
-        ↑
-      </button>
-  
-      <div *ngIf="loading" class="flex justify-center items-center h-32">
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-  
-      <div *ngIf="!loading && characters.length === 0" class="flex flex-col items-center justify-center min-h-[calc(100vh)] text-gray-500 text-center">
-        <p class="text-lg mb-2">No characters found</p>
-        <p class="text-sm">Try adjusting your search or filters</p>
-      </div>
-    
-      <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <lib-character-card *ngFor="let character of characters; trackBy: trackByFn" [character]="character"></lib-character-card>
-      </div>
+      <ion-icon name="arrow-up" class="w-6 h-6"></ion-icon>
+    </button>
+
+    <div *ngIf="loading" class="flex justify-center items-center h-32">
+      <div
+        class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"
+      ></div>
     </div>
-  </section>
-  
+
+    <div
+      *ngIf="!loading && characters.length === 0"
+      class="flex flex-col items-center justify-center min-h-[calc(100vh)] text-gray-500 text-center"
+    >
+      <p class="text-lg mb-2">No characters found</p>
+      <p class="text-sm">Try adjusting your search or filters</p>
+    </div>
+
+    <div
+      *ngIf="!loading"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+    >
+      <lib-character-card
+        *ngFor="let character of characters; trackBy: trackByFn"
+        [character]="character"
+      ></lib-character-card>
+    </div>
+  </div>
+</section>

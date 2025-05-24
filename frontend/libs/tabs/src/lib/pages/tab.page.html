@@ -5,7 +5,10 @@
     [class.expanded]="!isSidebarCollapsed"
     class="sidebar"
   >
-    <button (click)="toggleSidebar()" class="sidebar-toggle">
+    <button
+      (click)="toggleSidebar()"
+      class="sidebar-toggle rounded-full w-8 h-8 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+    >
       <ion-icon
         [name]="isSidebarCollapsed ? 'chevron-forward-outline' : 'chevron-back-outline'"
         class="text-xl"
