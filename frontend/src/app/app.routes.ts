@@ -12,6 +12,11 @@ export const appRoutes: Routes = [
       import("@frontend/feature-shell").then((m) => m.ShellModule),
   },
   {
+    path: "auth",
+    loadChildren: () =>
+      import("@frontend/feature-auth").then((m) => m.AuthModule),
+  },
+  {
     path: "**",
     redirectTo: "",
   },

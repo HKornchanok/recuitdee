@@ -1,52 +1,68 @@
-<div class="flex flex-col md:flex-row h-screen bg-background">
+<div class="flex flex-col overflow-y-hidden md:flex-row h-screen bg-background">
   <!-- Sidebar for PC -->
-  <nav [class.collapsed]="isSidebarCollapsed" [class.expanded]="!isSidebarCollapsed" class="sidebar">
+  <nav
+    [class.collapsed]="isSidebarCollapsed"
+    [class.expanded]="!isSidebarCollapsed"
+    class="sidebar"
+  >
     <button (click)="toggleSidebar()" class="sidebar-toggle">
-      <ion-icon [name]="isSidebarCollapsed ? 'chevron-forward-outline' : 'chevron-back-outline'" class="text-xl"></ion-icon>
+      <ion-icon
+        [name]="isSidebarCollapsed ? 'chevron-forward-outline' : 'chevron-back-outline'"
+        class="text-xl"
+      ></ion-icon>
     </button>
-    <a routerLink="search" routerLinkActive="active"
-       [class.collapsed]="isSidebarCollapsed"
-       class="sidebar-item">
+    <a
+      routerLink="search"
+      routerLinkActive="active"
+      [class.collapsed]="isSidebarCollapsed"
+      class="sidebar-item"
+    >
       <ion-icon name="search-outline" class="text-2xl"></ion-icon>
-      <span [class.collapsed]="isSidebarCollapsed" class="sidebar-item-text">Search</span>
+      <span [class.collapsed]="isSidebarCollapsed" class="sidebar-item-text"
+        >Search</span
+      >
     </a>
-    <a routerLink="favorite" routerLinkActive="active"
-       [class.collapsed]="isSidebarCollapsed"
-       class="sidebar-item">
+    <a
+      routerLink="favorite"
+      routerLinkActive="active"
+      [class.collapsed]="isSidebarCollapsed"
+      class="sidebar-item"
+    >
       <ion-icon name="bookmark-outline" class="text-2xl"></ion-icon>
-      <span [class.collapsed]="isSidebarCollapsed" class="sidebar-item-text">Favorite</span>
+      <span [class.collapsed]="isSidebarCollapsed" class="sidebar-item-text"
+        >Favorite</span
+      >
     </a>
-    <a routerLink="settings" routerLinkActive="active"
-       [class.collapsed]="isSidebarCollapsed"
-       class="sidebar-item">
+    <a
+      routerLink="settings"
+      routerLinkActive="active"
+      [class.collapsed]="isSidebarCollapsed"
+      class="sidebar-item"
+    >
       <ion-icon name="settings-outline" class="text-2xl"></ion-icon>
-      <span [class.collapsed]="isSidebarCollapsed" class="sidebar-item-text">Settings</span>
+      <span [class.collapsed]="isSidebarCollapsed" class="sidebar-item-text"
+        >Settings</span
+      >
     </a>
   </nav>
 
-  <div class="flex-1 p-4 overflow-auto pb-20 md:pb-4">
-    <h1 class="text-2xl font-semibold text-foreground mb-4">
-      Hello {{ user?.firstName }} {{ user?.lastName }}
-    </h1>
+  <div class="flex-1 p-4 pb-20 md:pb-4">
     <div class="tab-content">
       <router-outlet></router-outlet>
     </div>
   </div>
 
   <!-- Mobile Bottom Navigation -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 tab-navigation h-16">
-    <a routerLink="search" routerLinkActive="active"
-       class="tab-item">
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 tab-navigation h-14">
+    <a routerLink="search" routerLinkActive="active" class="tab-item">
       <ion-icon name="search-outline" class="text-2xl"></ion-icon>
       <span class="text-xs mt-1">Search</span>
     </a>
-    <a routerLink="favorite" routerLinkActive="active"
-       class="tab-item">
+    <a routerLink="favorite" routerLinkActive="active" class="tab-item">
       <ion-icon name="bookmark-outline" class="text-2xl"></ion-icon>
       <span class="text-xs mt-1">Favorite</span>
     </a>
-    <a routerLink="settings" routerLinkActive="active"
-       class="tab-item">
+    <a routerLink="settings" routerLinkActive="active" class="tab-item">
       <ion-icon name="settings-outline" class="text-2xl"></ion-icon>
       <span class="text-xs mt-1">Settings</span>
     </a>

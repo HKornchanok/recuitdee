@@ -1,0 +1,117 @@
+<div class="border rounded-lg border-border">
+  <button
+    (click)="toggleFilters()"
+    class="w-full px-4 py-2 flex items-center justify-between"
+  >
+    <span>Filters</span>
+    <span
+      class="transform transition-transform"
+      [class.rotate-180]="isFiltersExpanded"
+    >
+      ▼
+    </span>
+  </button>
+  <div
+    class="px-4 py-2 space-y-4 transition-all duration-300 ease-in-out"
+    [class.hidden]="!isFiltersExpanded"
+  >
+    <!-- Desktop view -->
+    <div class="hidden md:grid grid-cols-2 gap-4">
+      <select
+        [(ngModel)]="selectedGender"
+        (ngModelChange)="selectedGenderChange.emit($event); onFilterChange()"
+        class="w-full px-4 py-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      >
+        <option *ngFor="let option of genderOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select
+        [(ngModel)]="selectedStatus"
+        (ngModelChange)="selectedStatusChange.emit($event); onFilterChange()"
+        class="w-full px-4 py-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      >
+        <option *ngFor="let option of statusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Mobile view - Action sheets -->
+    <div class="md:hidden space-y-4">
+      <button
+        (click)="openGenderActionSheet()"
+        class="w-full px-4 py-2 text-left border border-border rounded-lg hover:bg-gray-50"
+      >
+        <div class="flex justify-between items-center">
+          <span>Gender</span>
+          <span class="text-gray-500">{{ getSelectedGenderLabel() }}</span>
+        </div>
+      </button>
+      <button
+        (click)="openStatusActionSheet()"
+        class="w-full px-4 py-2 text-left border border-border rounded-lg hover:bg-gray-50"
+      >
+        <div class="flex justify-between items-center">
+          <span>Status</span>
+          <span class="text-gray-500">{{ getSelectedStatusLabel() }}</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Action Sheet Overlays -->
+<div
+  *ngIf="isGenderActionSheetOpen"
+  class="text-foreground fixed inset-0 bg-background/50 z-50 md:hidden"
+>
+  <div
+    class="fixed bottom-0 left-0 right-0 bg-card rounded-t-2xl p-4 transform transition-transform duration-300 ease-in-out"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold">Select Gender</h3>
+      <button (click)="closeGenderActionSheet()" class="text-gray-500">
+        <span class="text-2xl">×</span>
+      </button>
+    </div>
+    <div class="space-y-2">
+      <button
+        *ngFor="let option of genderOptions"
+        (click)="selectGender(option.value)"
+        class="w-full px-4 py-3 text-left hover:bg-gray-50 rounded-lg"
+        [class.bg-primary]="selectedGender === option.value"
+        [class.text-white]="selectedGender === option.value"
+      >
+        {{ option.label }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="isStatusActionSheetOpen"
+  class="text-foreground fixed inset-0 bg-background/50 z-50 md:hidden"
+>
+  <div
+    class="fixed bottom-0 left-0 right-0 bg-card rounded-t-2xl p-4 transform transition-transform duration-300 ease-in-out"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold">Select Status</h3>
+      <button (click)="closeStatusActionSheet()" class="text-gray-500">
+        <span class="text-2xl">×</span>
+      </button>
+    </div>
+    <div class="space-y-2">
+      <button
+        *ngFor="let option of statusOptions"
+        (click)="selectStatus(option.value)"
+        class="w-full px-4 py-3 text-left hover:bg-gray-50 rounded-lg"
+        [class.bg-primary]="selectedStatus === option.value"
+        [class.text-white]="selectedStatus === option.value"
+      >
+        {{ option.label }}
+      </button>
+    </div>
+  </div>
+</div>

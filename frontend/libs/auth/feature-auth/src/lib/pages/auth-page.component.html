@@ -1,27 +1,29 @@
 <div class="page-content p-4 sm:p-6 text-foreground">
-    <h1 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 ">Auth Page</h1>
-  
-    <div class="card-section justify-center">
-      <div class="segment-selector mb-6 sm:mb-8">
-        <div class="flex justify-center space-x-2 sm:space-x-4 rounded-xl p-1 bg-gray-100 dark:bg-card backdrop-blur-sm">
-          <a 
-            routerLink="/second-page/auth/"
-            [routerLinkActive]="'bg-background text-primary shadow-md scale-105'"
-            [routerLinkActiveOptions]="{exact: true}"
-            class="flex-1 text-center px-4 py-2 text-sm sm:text-base rounded-lg font-medium transition-all duration-300 ease-out hover:bg-white/50 hover:text-primary cursor-pointer">
-            Login
-          </a>
-          <a 
-            routerLink="/second-page/auth/sign-up"
-            [routerLinkActive]="'bg-background text-primary shadow-md scale-105'"
-            [routerLinkActiveOptions]="{exact: true}"
-            class="flex-1 text-center px-4 py-2 text-sm sm:text-base rounded-lg font-medium transition-all duration-300 ease-out hover:bg-white/50 hover:text-primary cursor-pointer">
-            Register
-          </a>
-        </div>
-      </div>
-      <router-outlet></router-outlet>
+  <h1 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Auth Page</h1>
 
+  <div class="card-section justify-center">
+    <div class="segment-selector mb-6 sm:mb-8">
+      <div
+        class="flex justify-center space-x-2 sm:space-x-4 rounded-xl p-1 bg-gray-100 dark:bg-card backdrop-blur-sm"
+      >
+        <a
+          routerLink="/auth/"
+          [routerLinkActive]="'bg-background text-primary shadow-md scale-105'"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="flex-1 text-center px-4 py-2 text-sm sm:text-base rounded-lg font-medium transition-all duration-300 ease-out hover:bg-background/50 hover:text-primary cursor-pointer"
+        >
+          Login
+        </a>
+        <a
+          routerLink="/auth/sign-up"
+          [routerLinkActive]="'bg-background text-primary shadow-md scale-105'"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="flex-1 text-center px-4 py-2 text-sm sm:text-base rounded-lg font-medium transition-all duration-300 ease-out hover:bg-background/50 hover:text-primary cursor-pointer"
+        >
+          Register
+        </a>
+      </div>
     </div>
+    <router-outlet></router-outlet>
   </div>
-  
+</div>

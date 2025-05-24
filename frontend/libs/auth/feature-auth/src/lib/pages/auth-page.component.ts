@@ -9,16 +9,13 @@ import {CommonModule} from "@angular/common";
   templateUrl: "./auth-page.component.html",
 })
 export class AuthPageComponent {
-
-  constructor(
-    private router: Router,
-  ) {}
+  constructor(private router: Router) {}
 
   public onLoginClick() {
-    this.router.navigate(["second-page/auth"]);
+    this.router.navigate(["/auth"]);
   }
 
   public onRegisterClick() {
-    this.router.navigate(["second-page/auth/sign-up"]);
+    this.router.navigate(["/auth/sign-up"]);
   }
 }

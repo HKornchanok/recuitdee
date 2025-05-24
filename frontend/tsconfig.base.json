@@ -18,7 +18,17 @@
       "@frontend/auth-data-access": ["libs/auth/auth-data-access/src/index.ts"],
       "@frontend/core": ["libs/core/src/index.ts"],
       "@frontend/feature-auth": ["libs/auth/feature-auth/src/index.ts"],
+      "@frontend/feature-favorite": [
+        "libs/favorite/feature-favorite/src/index.ts"
+      ],
+      "@frontend/feature-search": ["libs/search/feature-search/src/index.ts"],
+      "@frontend/feature-settings": [
+        "libs/settings/feature-settings/src/index.ts"
+      ],
       "@frontend/feature-shell": ["libs/shell/feature-shell/src/index.ts"],
+      "@frontend/search-data-access": [
+        "libs/search/search-data-access/src/index.ts"
+      ],
       "@frontend/tabs": ["libs/tabs/src/index.ts"],
       "@frontend/theme": ["libs/theme/src/index.ts"],
       "@frontend/ui": ["libs/ui/src/index.ts"]
