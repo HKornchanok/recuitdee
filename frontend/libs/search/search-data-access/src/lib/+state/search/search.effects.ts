@@ -1,6 +1,6 @@
 import {inject} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {CharacterService} from "../providers/character.service";
+import {CharacterService} from "../../providers/character.service";
 import * as SearchActions from "./search.actions";
 import {catchError, map, of, switchMap} from "rxjs";
 

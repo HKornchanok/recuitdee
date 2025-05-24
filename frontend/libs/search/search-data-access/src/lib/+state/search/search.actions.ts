@@ -3,7 +3,7 @@ import {
   Character,
   CharacterFilter,
   CharacterPagination,
-} from "../interfaces/character.interface";
+} from "../../interfaces/character.interface";
 
 export const loadCharacters = createAction(
   "[Search] Load Characters",

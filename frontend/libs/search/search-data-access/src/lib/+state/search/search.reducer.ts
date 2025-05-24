@@ -1,5 +1,5 @@
 import {createReducer, on} from "@ngrx/store";
-import {Character} from "../interfaces/character.interface";
+import {Character} from "../../interfaces/character.interface";
 import * as SearchActions from "./search.actions";
 import {createEntityAdapter, EntityState} from "@ngrx/entity";
 
