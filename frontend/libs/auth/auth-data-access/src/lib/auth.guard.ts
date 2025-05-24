@@ -17,7 +17,11 @@ export class AuthGuard implements CanActivate {
         if (isAuthenticated) {
           return true;
         }
-        return this.router.createUrlTree(["/auth"]);
+        // Store the current URL in router state before redirecting
+        const currentUrl = this.router.url;
+        return this.router.createUrlTree(["/auth"], {
+          queryParams: {returnUrl: currentUrl !== "/" ? currentUrl : "/"},
+        });
       })
     );
   }

@@ -1,16 +1,28 @@
-<div class="page-content p-4 sm:p-6 text-foreground">
-  <h1 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Auth Page</h1>
+<div class="page-content p-4 text-foreground sm:p-6">
+  <!-- Back Button -->
+  <div class="flex justify-start w-full">
+    <button
+      (click)="goBack()"
+      class="mb-4 flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-300 hover:text-primary sm:text-base"
+    >
+      <ion-icon name="chevron-back" class="w-5 h-5"></ion-icon>
+      Back
+    </button>
+  </div>
 
-  <div class="card-section justify-center">
-    <div class="segment-selector mb-6 sm:mb-8">
+  <!-- Title -->
+
+  <!-- Auth Tabs -->
+  <div class="card-section">
+    <div class="segment-selector mb-6 sm:mb-8 flex justify-center">
       <div
-        class="flex justify-center space-x-2 sm:space-x-4 rounded-xl p-1 bg-gray-100 dark:bg-card backdrop-blur-sm"
+        class="flex w-full max-w-md rounded-xl bg-gray-100 p-1 backdrop-blur-sm dark:bg-card sm:space-x-4 space-x-2"
       >
         <a
           routerLink="/auth/"
           [routerLinkActive]="'bg-background text-primary shadow-md scale-105'"
           [routerLinkActiveOptions]="{exact: true}"
-          class="flex-1 text-center px-4 py-2 text-sm sm:text-base rounded-lg font-medium transition-all duration-300 ease-out hover:bg-background/50 hover:text-primary cursor-pointer"
+          class="flex-1 cursor-pointer rounded-lg px-4 py-2 text-center text-sm font-medium transition-all duration-300 ease-out hover:bg-background/50 hover:text-primary sm:text-base"
         >
           Login
         </a>
@@ -18,12 +30,16 @@
           routerLink="/auth/sign-up"
           [routerLinkActive]="'bg-background text-primary shadow-md scale-105'"
           [routerLinkActiveOptions]="{exact: true}"
-          class="flex-1 text-center px-4 py-2 text-sm sm:text-base rounded-lg font-medium transition-all duration-300 ease-out hover:bg-background/50 hover:text-primary cursor-pointer"
+          class="flex-1 cursor-pointer rounded-lg px-4 py-2 text-center text-sm font-medium transition-all duration-300 ease-out hover:bg-background/50 hover:text-primary sm:text-base"
         >
           Register
         </a>
       </div>
     </div>
-    <router-outlet></router-outlet>
+
+    <!-- Route outlet -->
+    <div class="max-w-md mx-auto w-full">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

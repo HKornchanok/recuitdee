@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ThemeFacade} from "./+state/theme.facades";
 
@@ -20,10 +20,6 @@ import {ThemeFacade} from "./+state/theme.facades";
     </button>
   `,
 })
-export class ThemeSwitcherComponent implements OnInit {
+export class ThemeSwitcherComponent {
   constructor(public themeFacade: ThemeFacade) {}
-
-  ngOnInit(): void {
-    this.themeFacade.initTheme();
-  }
 }

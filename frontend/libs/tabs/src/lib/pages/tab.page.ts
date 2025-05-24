@@ -3,7 +3,6 @@ import {RouterModule} from "@angular/router";
 import {AuthFacade} from "@frontend/auth-data-access";
 import {User} from "@frontend/auth-data-access";
 import {CommonModule} from "@angular/common";
-import {ThemeFacade} from "@frontend/theme";
 
 @Component({
   selector: "lib-tab-page",
@@ -18,12 +17,8 @@ export class TabPageComponent {
   isCollapsed = false;
   isSidebarCollapsed = false;
 
-  constructor(
-    private readonly authFacade: AuthFacade,
-    private readonly themeFacade: ThemeFacade
-  ) {
+  constructor(private readonly authFacade: AuthFacade) {
     this.authFacade.user$.subscribe((user) => (this.user = user));
-    this.themeFacade.initTheme();
   }
 
   toggleCollapse() {
