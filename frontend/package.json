@@ -7,9 +7,9 @@
     "build": "nx build",
     "test": "npm run test:affected",
     "test:all": "jest",
-    "test:affected": "jest --changedSince=develop --coverage",
+    "test:affected": "jest --changedSince=main --coverage",
     "lint": "nx run-many --target=lint --all --parallel",
-    "lint:affected": "nx affected:lint --base=develop --head=HEAD --parallel",
+    "lint:affected": "nx affected:lint --base=main --head=HEAD --parallel",
     "format": "nx format:write"
   },
   "private": true,
