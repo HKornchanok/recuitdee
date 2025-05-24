@@ -1,13 +1,12 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {CommonModule} from "@angular/common";
-import {ThemeSwitcherComponent} from "@frontend/theme";
 import { AuthFacade, User } from "@frontend/auth-data-access";
 
 @Component({
   selector: "app-landing-page",
   standalone: true,
-  imports: [CommonModule, ThemeSwitcherComponent],
+  imports: [CommonModule],
   templateUrl: "./landing-page.component.html",
 })
 export class LandingPageComponent {

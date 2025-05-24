@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {RouterModule, Routes} from "@angular/router";
 import {SearchPageComponent} from "./pages/search-page.component";
-import { SearchDataAccessModule } from "@frontend/search-data-access";
+import {SearchDataAccessModule} from "@frontend/search-data-access";
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule, 
+    CommonModule,
     RouterModule.forChild(routes),
     SearchDataAccessModule,
   ],

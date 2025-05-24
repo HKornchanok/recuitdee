@@ -8,7 +8,7 @@ const routes: Routes = [
     path: "",
     component: FavoritePageComponent,
   },
-];      
+];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes)],

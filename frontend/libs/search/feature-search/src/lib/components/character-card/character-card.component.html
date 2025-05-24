@@ -1,17 +1,45 @@
-<div class="character-card">
-  <div class="character-image">
-    <img [src]="character.image" [alt]="character.name">
-    <div class="status-badge" [class]="character.status.toLowerCase()">
-      {{ character.status }}
+<div class="rounded-lg shadow-lg overflow-hidden bg-gray-100 dark:bg-card ">
+  <div class="flex p-1 gap-4 h-full">
+    <img
+      class="w-50 h-50 rounded-lg object-cover flex-shrink-0"
+      [src]="character.image"
+      [alt]="character.name"
+    />
+    <div class="flex-1 flex flex-col">
+      <div class="mb-3">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-1">
+          {{ character.name }}
+        </h2>
+        <div class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+          <span
+            class="w-2 h-2 rounded-full mr-2"
+            [ngClass]="{
+              'bg-primary': character.status.toLowerCase() === 'alive',
+              'bg-red-500': character.status.toLowerCase() === 'dead',
+              'bg-gray-500': character.status.toLowerCase() === 'unknown'
+            }"
+          ></span>
+          {{ character.status }} - {{ character.species }}
+        </div>
+      </div>
+      <div class="space-y-2 flex-1">
+        <div>
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            Last known location:
+          </div>
+          <div class="text-sm text-foreground">
+            {{ character.location.name }}
+          </div>
+        </div>
+        <div>
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            First seen in:
+          </div>
+          <div class="text-sm text-foreground">
+            {{ firstEpisodeName || "Loading..." }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="character-info">
-    <h3 class="character-name">{{ character.name }}</h3>
-    <div class="character-details">
-      <p><strong>Species:</strong> {{ character.species }}</p>
-      <p><strong>Gender:</strong> {{ character.gender }}</p>
-      <p><strong>Origin:</strong> {{ character.origin.name }}</p>
-      <p><strong>Location:</strong> {{ character.location.name }}</p>
-    </div>
-  </div>
-</div> 
+</div>
