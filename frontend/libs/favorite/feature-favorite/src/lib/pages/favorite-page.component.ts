@@ -57,6 +57,7 @@ export class FavoritePageComponent implements OnInit, OnDestroy {
 
   public navigateToCharacterDetail(id: number): void {
     this.router.navigate([`second-page/search/${id}`]);
+    
   }
 
   public onGenderChange(gender: string): void {
