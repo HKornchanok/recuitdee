@@ -10,7 +10,9 @@
     "test:affected": "jest --changedSince=main --coverage",
     "lint": "nx run-many --target=lint --all --parallel",
     "lint:affected": "nx affected:lint --base=main --head=HEAD --parallel",
-    "format": "nx format:write"
+    "format": "nx format:write",
+    "e2e": "nx e2e e2e",
+    "e2e:open": "nx e2e e2e --watch"
   },
   "private": true,
   "dependencies": {
