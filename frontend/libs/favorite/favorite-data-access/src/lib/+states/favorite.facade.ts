@@ -16,17 +16,17 @@ interface FavoriteState {
   providedIn: "root",
 })
 export class FavoriteFacade {
-  constructor(private store: Store<FavoriteState>) {}
+  constructor(private readonly store: Store<FavoriteState>) {}
 
-  addFavorite(character: Character) {
+  public addFavorite(character: Character): void {
     this.store.dispatch(addFavorite({character}));
   }
 
-  removeFavorite(character: Character) {
+  public removeFavorite(character: Character): void {
     this.store.dispatch(removeFavorite({character}));
   }
 
-  getFavorites() {
+  public getFavorites(): void {
     this.store.dispatch(getFavorites());
   }
 

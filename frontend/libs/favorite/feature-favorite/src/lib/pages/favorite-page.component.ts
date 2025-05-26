@@ -17,12 +17,12 @@ import {FilterComponent} from "../filter/filter.component";
 export class FavoritePageComponent implements OnInit, OnDestroy {
   public favorites: Character[] = [];
   private destroy$ = new Subject<void>();
-  selectedGender = "";
-  selectedStatus = "";
-  isFiltersExpanded = false;
-  isGenderActionSheetOpen = false;
-  isStatusActionSheetOpen = false;
-  searchQuery = "";
+  public selectedGender = "";
+  public selectedStatus = "";
+  public isFiltersExpanded = false;
+  public isGenderActionSheetOpen = false;
+  public isStatusActionSheetOpen = false;
+  public searchQuery = "";
 
   genderOptions = [
     {value: "", label: "All Genders"},
@@ -32,9 +32,12 @@ export class FavoritePageComponent implements OnInit, OnDestroy {
     {value: "unknown", label: "Unknown"},
   ];
 
-  constructor(private favoriteFacade: FavoriteFacade, private router: Router) {}
+  constructor(
+    private readonly favoriteFacade: FavoriteFacade,
+    private readonly router: Router
+  ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.favoriteFacade
       .getFavorites$()
       .pipe(takeUntil(this.destroy$))
@@ -43,40 +46,40 @@ export class FavoritePageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  trackByFn(index: number, character: Character): string {
+  public trackByFn(index: number, character: Character): string {
     return character.id.toString();
   }
 
-  navigateToCharacterDetail(id: number): void {
+  public navigateToCharacterDetail(id: number): void {
     this.router.navigate([`second-page/search/${id}`]);
   }
 
-  onGenderChange(gender: string): void {
+  public onGenderChange(gender: string): void {
     this.selectedGender = gender;
   }
 
-  onStatusChange(status: string): void {
+  public onStatusChange(status: string): void {
     this.selectedStatus = status;
   }
 
-  onSearch(): void {
+  public onSearch(): void {
     this.applyFilters();
   }
 
-  onFilterChange(): void {
+  public onFilterChange(): void {
     this.applyFilters();
   }
 
-  private applyFilters(): void {
+  private async applyFilters(): Promise<void> {
     this.favoriteFacade
       .getFavorites$()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((favorites) => {
+      .subscribe(async (favorites) => {
         this.favorites = favorites.filter((character) => {
           const nameMatch =
             !this.searchQuery ||

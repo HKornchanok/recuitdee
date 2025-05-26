@@ -8,7 +8,7 @@ export class SearchEffects {
   private readonly actions$ = inject(Actions);
   private readonly characterService = inject(CharacterService);
 
-  loadCharacters$ = createEffect(() =>
+  public loadCharacters$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SearchActions.loadCharacters),
       switchMap(({pagination, refresh}) =>
@@ -21,7 +21,7 @@ export class SearchEffects {
     )
   );
 
-  loadCharacterById$ = createEffect(() =>
+  public loadCharacterById$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SearchActions.loadCharacterById),
       switchMap(({id}) =>
@@ -37,7 +37,7 @@ export class SearchEffects {
     )
   );
 
-  loadDetailsByCharacterId$ = createEffect(() =>
+  public loadDetailsByCharacterId$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SearchActions.loadDetailsByCharacterId),
       switchMap(({character}) =>

@@ -17,18 +17,18 @@ import {FavoriteFacade} from "@frontend/favorite-data-access";
 })
 export class CharacterDetailPageComponent implements OnInit {
   private destroy$ = new Subject<void>();
-  characterId: string | null = null;
-  character: Character | null = null;
-  isFavorite = false;
+  public characterId: string | null = null;
+  public character: Character | null = null;
+  public isFavorite = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private searchFacade: SearchFacade,
-    private router: Router,
-    private favoriteFacade: FavoriteFacade
+    private readonly route: ActivatedRoute,
+    private readonly searchFacade: SearchFacade,
+    private readonly router: Router,
+    private readonly favoriteFacade: FavoriteFacade
   ) {}
 
-  toggleFavorite(): void {
+  public toggleFavorite(): void {
     this.isFavorite = !this.isFavorite;
     if (!this.character) return;
     if (this.isFavorite) {
@@ -38,7 +38,7 @@ export class CharacterDetailPageComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.characterId = params.get("id");
       if (this.characterId) {
@@ -64,7 +64,7 @@ export class CharacterDetailPageComponent implements OnInit {
     });
   }
 
-  goBack() {
+  public goBack(): void {
     if (window.history.length > 1) {
       window.history.back();
     } else {
