@@ -10,11 +10,11 @@ import {Character, CharacterService} from "@frontend/search-data-access";
 })
 export class CharacterCardComponent implements OnInit {
   @Input() character!: Character;
-  firstEpisodeName: string | null = null;
+  public firstEpisodeName: string | null = null;
 
-  constructor(private characterService: CharacterService) {}
+  constructor(private readonly characterService: CharacterService) {}
 
-  async ngOnInit(): Promise<void> {
+  public async ngOnInit(): Promise<void> {
     if (this.character.episode && this.character.episode.length > 0) {
       const firstEpisode = await this.characterService.getEpisodeByUrl(
         this.character.episode[0] as string

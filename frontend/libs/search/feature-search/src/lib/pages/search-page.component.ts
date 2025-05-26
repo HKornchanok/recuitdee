@@ -109,6 +109,6 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   public navigateToCharacterDetail(id: number): void {
-    this.router.navigate([`second-page/search/${id}`]);
+    this.router.navigate([`inside/search/${id}`]);
   }
 }

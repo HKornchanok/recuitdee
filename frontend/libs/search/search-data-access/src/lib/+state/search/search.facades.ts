@@ -11,7 +11,7 @@ import {
   selectSearchResults,
   selectSearchState,
 } from "./search.selectors";
-import {from, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {SearchState} from "./search.reducer";
 
 @Injectable({
@@ -20,7 +20,10 @@ import {SearchState} from "./search.reducer";
 export class SearchFacade {
   constructor(private readonly store: Store<SearchState>) {}
 
-  public loadCharacters(pagination: CharacterPagination, refresh = false) {
+  public loadCharacters(
+    pagination: CharacterPagination,
+    refresh = false
+  ): void {
     this.store.dispatch(SearchActions.loadCharacters({pagination, refresh}));
   }
 
@@ -32,7 +35,7 @@ export class SearchFacade {
     return this.store.select(selectSearchState);
   }
 
-  public updateFilter(filter: CharacterFilter) {
+  public updateFilter(filter: CharacterFilter): void {
     this.store.dispatch(SearchActions.updateFilter({filter}));
   }
 

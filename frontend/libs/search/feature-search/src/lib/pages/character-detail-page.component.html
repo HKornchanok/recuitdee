@@ -1,13 +1,15 @@
 <div
-  class="text-foreground overflow-y-auto h-[calc(100vh)] pb-25 pt-2 scrollbar-hide"
+  class="text-foreground overflow-y-auto h-[calc(100vh)] pb-25 scrollbar-hide"
 >
-  <button
-    (click)="goBack()"
-    class="flex items-center gap-2 px-4 py-2 mb-6 bg-background hover:bg-primary rounded-lg transition-colors duration-200 relative z-10"
-  >
-    <ion-icon name="arrow-back" class="text-xl"></ion-icon>
-    <span class="font-medium">Back</span>
-  </button>
+  <div class="flex justify-start w-full">
+    <button
+      (click)="goBack()"
+      class="flex items-center mb-15 gap-2 text-sm text-muted-foreground transition-colors duration-300 hover:text-primary sm:text-base z-10"
+    >
+      <ion-icon name="chevron-back" class="w-5 h-5"></ion-icon>
+      Back
+    </button>
+  </div>
 
   <div class="relative -mt-20 mb-8">
     <div class="card-section border-none">

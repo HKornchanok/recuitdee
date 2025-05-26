@@ -10,7 +10,7 @@ import {ThemeFacade} from "@frontend/theme";
   styles: [],
 })
 export class AppComponent {
-  title = "frontend";
+  public title = "frontend";
 
   constructor(
     private readonly authFacade: AuthFacade,

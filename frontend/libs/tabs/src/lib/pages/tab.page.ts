@@ -13,19 +13,19 @@ import {CommonModule} from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TabPageComponent {
-  user: User | null = null;
-  isCollapsed = false;
-  isSidebarCollapsed = false;
+  public user: User | null = null;
+  public isCollapsed = false;
+  public isSidebarCollapsed = false;
 
   constructor(private readonly authFacade: AuthFacade) {
     this.authFacade.user$.subscribe((user) => (this.user = user));
   }
 
-  toggleCollapse() {
+  public toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  toggleSidebar() {
+  public toggleSidebar(): void {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 }

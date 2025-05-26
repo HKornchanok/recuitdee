@@ -17,13 +17,18 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class AuthPageComponent implements OnDestroy {
   public returnUrl = "/";
+  public queryParams: Record<string, string> = {};
   private destroy$ = new Subject<void>();
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
+  ) {
     this.route.queryParams
       .pipe(takeUntil(this.destroy$))
       .subscribe((params: Record<string, string>) => {
         this.returnUrl = params["returnUrl"] || "/";
+        this.queryParams = params;
       });
   }
 

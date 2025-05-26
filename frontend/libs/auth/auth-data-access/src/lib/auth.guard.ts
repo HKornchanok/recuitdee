@@ -8,7 +8,10 @@ import {AuthFacade} from "./+state/auth.facade";
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authFacade: AuthFacade, private router: Router) {}
+  constructor(
+    private readonly authFacade: AuthFacade,
+    private readonly router: Router
+  ) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.authFacade.isAuthenticated$.pipe(

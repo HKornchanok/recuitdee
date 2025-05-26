@@ -13,7 +13,7 @@ export const appRoutes: Routes = [
     component: LandingPageComponent,
   },
   {
-    path: "second-page",
+    path: "inside",
     loadChildren: () =>
       import("@frontend/feature-shell").then((m) => m.ShellModule),
   },

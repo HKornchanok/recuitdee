@@ -15,25 +15,33 @@ import {Router} from "@angular/router";
 export class SettingsPageComponent implements OnInit {
   public isAuthenticated = false;
   constructor(
-    private authFacade: AuthFacade,
-    private actions: Actions,
-    private destroyRef: DestroyRef,
-    private router: Router
+    private readonly authFacade: AuthFacade,
+    private readonly actions: Actions,
+    private readonly destroyRef: DestroyRef,
+    private readonly router: Router
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.authFacade.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isAuthenticated = isAuthenticated;
     });
   }
 
-  async logout() {
+  public async logout(): Promise<void> {
     await this.watchActionsChange();
     this.authFacade.logout();
   }
 
-  async login() {
-    this.router.navigate(["/auth"]);
+  public async login(): Promise<void> {
+    this.router.navigate(["/auth"], {
+      queryParams: {
+        returnUrl: "/inside/settings",
+      },
+    });
+  }
+
+  public goBack(): void {
+    this.router.navigate(["/"]);
   }
 
   private async watchActionsChange(): Promise<void> {

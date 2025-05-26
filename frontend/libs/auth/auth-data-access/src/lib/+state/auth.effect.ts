@@ -87,7 +87,7 @@ export class AuthEffects {
         ofType(AuthActions.signUpSuccess),
         tap(({token}) => {
           localStorage.setItem("token", token);
-          this.router.navigate(["/second-page"]);
+          this.router.navigate(["/inside"]);
         })
       ),
     {dispatch: false}

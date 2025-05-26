@@ -11,12 +11,16 @@ const routes: Routes = [
     component: AuthPageComponent,
     children: [
       {
-        path: "",
+        path: "login",
         component: LoginPageComponent,
       },
       {
         path: "sign-up",
         component: SignUpPageComponent,
+      },
+      {
+        path: "**",
+        redirectTo: "login",
       },
     ],
   },
