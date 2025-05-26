@@ -1,81 +1,160 @@
 # Frontend
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This is an Angular-based frontend application built with Nx workspace, featuring state management with NgRx and styling with Tailwind CSS.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Installation
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-
-## Finish your CI setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/18WVvA4ppJ)
-
-## Run tasks
-
-To run the dev server for your app, use:
+1. Clone the repository:
+2. Install dependencies:
 
 ```sh
+cd frontend
+```
+
+```sh
+npm install
+```
+
+## Development
+
+To run the development server:
+
+```sh
+# Start the development server
+npm start
+# or
 npx nx serve frontend
 ```
 
-To create a production bundle:
+The application will be available at `http://localhost:4200` by default.
+
+## Building
+
+To create a production build:
 
 ```sh
+# Create production build
+npm run build
+# or
 npx nx build frontend
 ```
 
-To see all available targets to run for a project, run:
+The build artifacts will be stored in the `dist/` directory.
+
+## Testing
 
 ```sh
-npx nx show project frontend
+# Run all tests
+npm run test:all
+
+# Run tests for affected files
+npm run test
+
+# Run linting
+npm run lint
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## Available Scripts
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- `npm start` - Start the development server
+- `npm run build` - Create a production build
+- `npm run test` - Run tests for affected files
+- `npm run test:all` - Run all tests
+- `npm run lint` - Run linting
+- `npm run format` - Format code using Prettier
 
-## Add new projects
+## Tech Stack
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+- Angular 19
+- NgRx for state management
+- Tailwind CSS for styling
+- Jest for testing
+- ESLint for code linting
+- Prettier for code formatting
 
-Use the plugin's generator to create new projects.
+## Project Structure
 
-To generate a new application, use:
+- `src/` - Source code
+- `libs/` - Shared libraries
+- `e2e/` - End-to-end tests
+- `public/` - Static assets
 
-```sh
-npx nx g @nx/angular:app demo
-```
+## Features
 
-To generate a new library, use:
+### User Interface
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+- **Landing Page**
+- **Search Page**
+- **Favorite Page**
+- **Settings Page**
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+### State Management
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+#### Auth State (`auth`)
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **Purpose**: Manages user authentication and session
+- **Key Features**:
+  - User login/logout state
+  - User profile information
+  - Authentication token management
+  - Session persistence
 
-## Install Nx Console
+#### Search State (`search`)
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+- **Purpose**: Manages character search and filtering
+- **Key Features**:
+  - Search results management
+  - Pagination state
+  - Filter state (search query, gender, status)
+  - Loading and error states
+  - Character details caching
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+#### Favorite State (`favorite`)
 
-## Useful links
+- **Purpose**: Manages user's favorite characters
+- **Key Features**:
+  - Add/remove favorites
+  - Favorite list persistence
+  - Favorite state synchronization
+  - Entity state management for favorites
 
-Learn more:
+#### Theme State (`theme`)
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **Purpose**: Manages application theme preferences
+- **Key Features**:
+  - Dark/Light mode toggle
+  - Theme persistence
+  - Theme initialization
 
-And join the Nx community:
+Each state is managed using NgRx with the following features:
 
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- Reducers for state updates
+- Actions for state changes
+- Selectors for state access
+- Effects for side effects
+- Facades for state interaction
+- Entity state management where applicable
+
+### Technical Features
+
+- **Modern Architecture**
+  - Angular 19 framework
+  - Lazy-loaded modules
+  - Component-based architecture
+  - Responsive design with Tailwind CSS
+
+### Development Features
+
+- **Code Quality**
+  - ESLint for code linting
+  - Prettier for code formatting
+  - Comprehensive testing setup
+  - TypeScript for type safety
+
+### Performance
+
+- **Optimization**
+  - Lazy loading for better performance
+  - Efficient state management
+  - Optimized bundle size
+  - Fast page loads

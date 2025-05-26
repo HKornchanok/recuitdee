@@ -13,6 +13,11 @@ import {ThemeEffects} from "@frontend/theme";
 import {APP_CONFIG} from "@frontend/core";
 import {environment} from "../environments/environment";
 import {provideHttpClient} from "@angular/common/http";
+import {
+  AuthEffects,
+  authFeatureKey,
+  authReducer,
+} from "@frontend/auth-data-access";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,8 +27,9 @@ export const appConfig: ApplicationConfig = {
     },
     provideStore({
       [themeFeature.name]: themeFeature.reducer,
+      [authFeatureKey]: authReducer,
     }),
-    provideEffects([ThemeEffects]),
+    provideEffects([ThemeEffects, AuthEffects]),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(appRoutes),
     provideHttpClient(),
