@@ -1,0 +1,55 @@
+<!-- Profile Content -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Left Column -->
+  <div #about class="col-span-1 border border-border p-4 rounded-lg">
+    <div class="space-y-4">
+      <div>
+        <p class="text-gray-600">Status</p>
+        <p class="font-medium">{{ character?.status }}</p>
+      </div>
+      <div>
+        <p class="text-gray-600">Species</p>
+        <p class="font-medium">{{ character?.species }}</p>
+      </div>
+      <div>
+        <p class="text-gray-600">Gender</p>
+        <p class="font-medium">{{ character?.gender }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="col-span-1 md:col-span-2 border border-border p-4 rounded-lg">
+    <h2 class="text-lg font-semibold mb-4">Location</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div *ngIf="character?.locationDetails" class="space-y-4">
+        <div>
+          <p class="text-gray-600">Last known location</p>
+          <p class="font-medium">{{ character?.locationDetails?.name }}</p>
+        </div>
+        <div>
+          <p class="text-gray-600">Type</p>
+          <p class="font-medium">{{ character?.locationDetails?.type }}</p>
+        </div>
+        <div>
+          <p class="text-gray-600">Dimension</p>
+          <p class="font-medium">{{ character?.locationDetails?.dimension }}</p>
+        </div>
+      </div>
+      <div *ngIf="character?.originDetails" class="space-y-4">
+        <div>
+          <p class="text-gray-600">Origin</p>
+          <p class="font-medium">{{ character?.originDetails?.name }}</p>
+        </div>
+        <div>
+          <p class="text-gray-600">Type</p>
+          <p class="font-medium">{{ character?.originDetails?.type }}</p>
+        </div>
+        <div>
+          <p class="text-gray-600">Dimension</p>
+          <p class="font-medium">{{ character?.originDetails?.dimension }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+import {Store} from "@ngrx/store";
+import {addFavorite, removeFavorite, getFavorites} from "./favorite.actions";
+import {Injectable} from "@angular/core";
+import {Character} from "@frontend/search-data-access";
+import {Observable} from "rxjs";
+import {selectFavorites} from "./favorite.selectors";
+import {favoriteAdapter} from "./favorite.interface";
+import {map} from "rxjs/operators";
+import {EntityState} from "@ngrx/entity";
+
+interface FavoriteState {
+  [key: string]: EntityState<Character>;
+}
+
+@Injectable({
+  providedIn: "root",
+})
+export class FavoriteFacade {
+  constructor(private store: Store<FavoriteState>) {}
+
+  addFavorite(character: Character) {
+    this.store.dispatch(addFavorite({character}));
+  }
+
+  removeFavorite(character: Character) {
+    this.store.dispatch(removeFavorite({character}));
+  }
+
+  getFavorites() {
+    this.store.dispatch(getFavorites());
+  }
+
+  public getFavorites$(): Observable<Character[]> {
+    return this.store
+      .select(selectFavorites)
+      .pipe(map((state) => favoriteAdapter.getSelectors().selectAll(state)));
+  }
+}

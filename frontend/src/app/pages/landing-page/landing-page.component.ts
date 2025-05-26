@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {CommonModule} from "@angular/common";
-import { AuthFacade, User } from "@frontend/auth-data-access";
+import {AuthFacade, User} from "@frontend/auth-data-access";
 
 @Component({
   selector: "app-landing-page",
@@ -9,10 +9,12 @@ import { AuthFacade, User } from "@frontend/auth-data-access";
   imports: [CommonModule],
   templateUrl: "./landing-page.component.html",
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
   user: User | null = null;
-  constructor(private router: Router, private authFacade: AuthFacade) {
-    this.authFacade.user$.subscribe((user) => this.user = user);
+  constructor(private router: Router, private authFacade: AuthFacade) {}
+
+  ngOnInit(): void {
+    this.authFacade.user$.subscribe((user) => (this.user = user));
   }
 
   navigateToSecondPage() {

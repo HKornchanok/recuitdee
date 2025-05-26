@@ -1,0 +1,19 @@
+<!-- Profile Content -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Left Column -->
+  <lib-episode-card
+    *ngFor="let episode of episodes"
+    [episode]="episode"
+  ></lib-episode-card>
+</div>
+
+<style>
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+</style>

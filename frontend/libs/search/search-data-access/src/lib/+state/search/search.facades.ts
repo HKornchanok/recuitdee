@@ -4,10 +4,14 @@ import {
   CharacterFilter,
   CharacterPagination,
 } from "../../interfaces/character.interface";
-import {loadCharacters, updateFilter} from "./search.actions";
+import * as SearchActions from "./search.actions";
 import {Injectable} from "@angular/core";
-import {selectSearchResults, selectSearchState} from "./search.selectors";
-import {Observable} from "rxjs";
+import {
+  selectCharacterById,
+  selectSearchResults,
+  selectSearchState,
+} from "./search.selectors";
+import {from, Observable} from "rxjs";
 import {SearchState} from "./search.reducer";
 
 @Injectable({
@@ -17,7 +21,7 @@ export class SearchFacade {
   constructor(private readonly store: Store<SearchState>) {}
 
   public loadCharacters(pagination: CharacterPagination, refresh = false) {
-    this.store.dispatch(loadCharacters({pagination, refresh}));
+    this.store.dispatch(SearchActions.loadCharacters({pagination, refresh}));
   }
 
   public get results$(): Observable<Character[]> {
@@ -29,6 +33,20 @@ export class SearchFacade {
   }
 
   public updateFilter(filter: CharacterFilter) {
-    this.store.dispatch(updateFilter({filter}));
+    this.store.dispatch(SearchActions.updateFilter({filter}));
+  }
+
+  public getCharacterById(id: number): Observable<Character | undefined> {
+    return this.store.select(selectCharacterById(id));
+  }
+
+  public loadCharacterById(id: number): void {
+    this.store.dispatch(SearchActions.loadCharacterById({id}));
+  }
+
+  public loadDetailsByCharacterId(id: number, character: Character): void {
+    this.store.dispatch(
+      SearchActions.loadDetailsByCharacterId({id, character})
+    );
   }
 }

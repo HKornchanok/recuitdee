@@ -1,0 +1,104 @@
+<div
+  class="text-foreground overflow-y-auto h-[calc(100vh)] pb-25 pt-2 scrollbar-hide"
+>
+  <button
+    (click)="goBack()"
+    class="flex items-center gap-2 px-4 py-2 mb-6 bg-background hover:bg-primary rounded-lg transition-colors duration-200 relative z-10"
+  >
+    <ion-icon name="arrow-back" class="text-xl"></ion-icon>
+    <span class="font-medium">Back</span>
+  </button>
+
+  <div class="relative -mt-20 mb-8">
+    <div class="card-section border-none">
+      <div class="flex flex-col lg:flex-row items-start justify-between gap-6">
+        <div
+          class="flex flex-col sm:flex-row items-center sm:items-end gap-6 flex-1"
+        >
+          <div class="relative group">
+            <div class="absolute rounded-full"></div>
+            <img
+              [src]="character?.image"
+              class="relative w-36 h-36 rounded-full border-4 border-white"
+              alt="Profile picture"
+            />
+            <button
+              (click)="toggleFavorite()"
+              class="absolute bottom-2 right-2 w-6 h-6 bg-gradient-to-r from-primary to-indigo-500 rounded-full shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center"
+              [class]="
+                isFavorite
+                  ? 'bg-gradient-to-r from-red-500 to-pink-500'
+                  : 'bg-gradient-to-r from-primary to-indigo-500'
+              "
+            >
+              <ion-icon
+                [name]="isFavorite ? 'heart' : 'heart-outline'"
+                class="text-white text-sm transition-transform duration-300"
+              ></ion-icon>
+            </button>
+          </div>
+
+          <div class="text-center sm:text-left">
+            <h1 class="text-4xl font-bold bg-clip-text mb-2">
+              {{ character?.name }}
+            </h1>
+            <p class="text-lg text-gray-600 mb-2">{{ character?.species }}</p>
+
+            <div class="flex flex-wrap gap-4 justify-center sm:justify-start">
+              <div
+                class="flex items-center gap-2 px-3 py-1.5 bg-card rounded-full border border-border"
+              >
+                <ion-icon name="location" class="text-blue-500"></ion-icon>
+                <span class="text-sm font-medium text-blue-700">{{
+                  character?.location?.name
+                }}</span>
+              </div>
+              <div
+                class="flex items-center gap-2 px-3 py-1.5 bg-card rounded-full border border-border"
+              >
+                <ion-icon name="pulse" class="text-green-500"></ion-icon>
+                <span class="text-sm font-medium text-green-700">{{
+                  character?.status
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div>
+        <div class="bg-background rounded-2xl p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center"
+            >
+              <ion-icon name="information-circle" class="text-2xl"></ion-icon>
+            </div>
+            <h2 class="text-2xl font-bold">About {{ character?.name }}</h2>
+          </div>
+          <lib-about
+            [character]="character"
+            class="transform transition-all duration-500 hover:scale-[1.01]"
+          ></lib-about>
+        </div>
+      </div>
+
+      <div class="bg-background rounded-2xl p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <div
+            class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center"
+          >
+            <ion-icon name="film" class="text-2xl"></ion-icon>
+          </div>
+          <h2 class="text-2xl font-bold">Episodes</h2>
+        </div>
+        <lib-episodes
+          [episodes]="character?.episodeDetails"
+          class="transform transition-all duration-500 hover:scale-[1.01]"
+        ></lib-episodes>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,15 +11,22 @@ export interface Character {
   type: string;
   gender: string;
   origin: Location;
+  originDetails?: Location;
   location: Location;
+  locationDetails?: Location;
   image: string;
   episode: string[];
+  episodeDetails?: Episode[];
   url: string;
   created: string;
 }
 
 export interface Location {
+  dimension: string;
+  id: number;
   name: string;
+  residents: string[];
+  type: string;
   url: string;
 }
 
@@ -53,3 +60,13 @@ export interface CharacterResults {
 
 export type Gender = "Male" | "Female" | "Genderless" | "unknown";
 export type Status = "Alive" | "Dead" | "unknown";
+
+export interface Episode {
+  air_date?: string;
+  characters?: string[];
+  created?: string;
+  episode?: string;
+  id?: number;
+  name?: string;
+  url: string;
+}

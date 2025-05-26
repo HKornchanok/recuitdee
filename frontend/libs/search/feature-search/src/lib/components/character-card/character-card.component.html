@@ -16,15 +16,23 @@
           <span
             class="w-2 h-2 rounded-full mr-2"
             [ngClass]="{
-              'bg-primary': character.status.toLowerCase() === 'alive',
-              'bg-red-500': character.status.toLowerCase() === 'dead',
-              'bg-gray-500': character.status.toLowerCase() === 'unknown'
+              'bg-primary': character.status === 'Alive',
+              'bg-red-500': character.status === 'Dead',
+              'bg-gray-500': character.status === 'Unknown'
             }"
           ></span>
-          {{ character.status }} - {{ character.species }}
+          {{ character.status }}
         </div>
       </div>
       <div class="space-y-2 flex-1">
+        <div>
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            Species:
+          </div>
+          <div class="text-sm text-foreground">
+            {{ character.species }}
+          </div>
+        </div>
         <div>
           <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
             Last known location:
