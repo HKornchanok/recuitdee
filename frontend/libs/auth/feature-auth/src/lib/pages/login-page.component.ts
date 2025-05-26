@@ -19,6 +19,7 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent {
   loginForm: FormGroup;
+  errorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +36,7 @@ export class LoginPageComponent {
 
   async onSubmit(): Promise<void> {
     if (this.loginForm.valid) {
+      this.errorMessage = null;
       await this.watchActionsChange();
       this.authFacade.login(this.loginForm.value);
     }
@@ -48,7 +50,7 @@ export class LoginPageComponent {
           this.router.navigate(["/second-page"]);
         }
         if (action.type === AuthActions.ActionTypes.LoginFailure) {
-          console.log("login failure");
+          this.errorMessage = "Invalid username or password. Please try again.";
         }
       });
   }

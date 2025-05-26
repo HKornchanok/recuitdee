@@ -28,6 +28,8 @@ npx nx serve frontend
 
 The application will be available at `http://localhost:4200` by default.
 
+> **Important**: Make sure to start the backend server in the `../backend` directory before running the frontend application.
+
 ## Building
 
 To create a production build:
@@ -53,6 +55,38 @@ npm run test
 # Run linting
 npm run lint
 ```
+
+### End-to-End Testing
+
+> **Important**: Make sure the backend server is running in the `../backend` directory before running E2E tests.
+
+The project uses Cypress for end-to-end testing. E2E tests are located in the `e2e/` directory and cover critical user flows including:
+
+- Landing page navigation
+- Authentication flows (login/signup)
+- Theme switching
+- Route protection
+- Form validations
+
+To run E2E tests:
+
+```sh
+# Run E2E tests in headless mode
+npm run e2e
+
+# Run E2E tests with UI
+npm run e2e:open
+
+Key test scenarios covered:
+- Landing page welcome message
+- Navigation between pages
+- Invalid route handling
+- Authentication flows
+  - Login attempts (valid/invalid)
+  - Sign-up form validation
+  - Protected route access
+- Theme switching functionality
+- Settings page interactions
 
 ## Available Scripts
 
@@ -158,3 +192,4 @@ Each state is managed using NgRx with the following features:
   - Efficient state management
   - Optimized bundle size
   - Fast page loads
+```
