@@ -28,7 +28,7 @@ export class CharacterDetailPageComponent implements OnInit {
     private readonly searchFacade: SearchFacade,
     private readonly router: Router,
     private readonly favoriteFacade: FavoriteFacade,
-    private readonly authFacade: AuthFacade,
+    private readonly authFacade: AuthFacade
   ) {}
 
   public ngOnInit(): void {
@@ -36,7 +36,6 @@ export class CharacterDetailPageComponent implements OnInit {
       this.characterId = params.get("id");
       if (this.characterId) {
         const id = parseInt(this.characterId);
-        
 
         this.searchFacade
           .getCharacterById(parseInt(this.characterId))
@@ -57,9 +56,11 @@ export class CharacterDetailPageComponent implements OnInit {
       }
     });
 
-    this.authFacade.isAuthenticated$.pipe(takeUntil(this.destroy$)).subscribe((isAuthenticated) => {
-      this.isAuthenticated = isAuthenticated;
-    });
+    this.authFacade.isAuthenticated$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isAuthenticated) => {
+        this.isAuthenticated = isAuthenticated;
+      });
 
     if (this.characterId) {
       this.favoriteFacade
@@ -74,7 +75,7 @@ export class CharacterDetailPageComponent implements OnInit {
   public toggleFavorite(): void {
     this.isFavorite = !this.isFavorite;
 
-    if(!this.isAuthenticated) {
+    if (!this.isAuthenticated) {
       this.router.navigate(["/auth/login"], {
         queryParams: {
           returnUrl: this.router.url,
@@ -92,15 +93,14 @@ export class CharacterDetailPageComponent implements OnInit {
   }
 
   public goBack(): void {
-    if(!this.isAuthenticated) {
-      this.router.navigate(["/second-page/search"]);
+    if (!this.isAuthenticated) {
+      this.router.navigate(["/inside/search"]);
       return;
     }
     if (window.history.length > 1) {
-      console.log(window.history);
       window.history.back();
     } else {
-      this.router.navigate(["/second-page/search"]);
+      this.router.navigate(["/inside/search"]);
     }
   }
 }

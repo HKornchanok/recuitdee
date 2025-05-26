@@ -37,14 +37,14 @@ export class FavoriteFacade {
   }
 
   public getIsFavorite(characterId: number): Observable<boolean> {
-    return this.store.select(selectFavorites).pipe(
-      map((state) =>
-        favoriteAdapter
-          .getSelectors()
-          .selectEntities(state)[characterId]
-          ? true
-          : false
-      )
-    );
+    return this.store
+      .select(selectFavorites)
+      .pipe(
+        map((state) =>
+          favoriteAdapter.getSelectors().selectEntities(state)[characterId]
+            ? true
+            : false
+        )
+      );
   }
 }

@@ -36,7 +36,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   public navigateToSecondPage(): void {
-    this.router.navigate(["/second-page"]);
+    this.router.navigate(["/inside"]);
   }
 
   public async getCharactersCount(): Promise<number> {
@@ -55,7 +55,6 @@ export class LandingPageComponent implements OnInit {
         "https://rickandmortyapi.com/api/location"
       )
     );
-    console.log(response);
     this.locationsCount = response.info.count;
     return response.info.count;
   }

@@ -35,9 +35,13 @@ export class SettingsPageComponent implements OnInit {
   public async login(): Promise<void> {
     this.router.navigate(["/auth"], {
       queryParams: {
-        returnUrl: "/second-page/settings",
+        returnUrl: "/inside/settings",
       },
     });
+  }
+
+  public goBack(): void {
+    this.router.navigate(["/"]);
   }
 
   private async watchActionsChange(): Promise<void> {

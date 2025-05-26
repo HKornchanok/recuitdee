@@ -9,13 +9,15 @@ describe("App", () => {
     // Check if we're on the landing page
     cy.url().should("eq", Cypress.config().baseUrl + "/");
     // Check for welcome message
-    cy.contains("Welcome to our platform!").should("exist");
+    cy.contains("Welcome to the Rick and Morty Multiverse Explorer!").should(
+      "exist"
+    );
   });
 
-  it("should navigate to second page", () => {
-    // Click the button to navigate to second page
-    cy.contains("button", "Go to Second Page").click();
-    cy.url().should("include", "/second-page");
+  it("should navigate to inside page", () => {
+    // Click the button to navigate to inside page
+    cy.contains("button", "Go to Inside Page").click();
+    cy.url().should("include", "/inside");
   });
 
   it("should handle invalid routes", () => {
@@ -25,9 +27,9 @@ describe("App", () => {
     cy.url().should("eq", Cypress.config().baseUrl + "/");
   });
 
-  describe("Second Page", () => {
+  describe("inside page", () => {
     beforeEach(() => {
-      cy.visit("/second-page");
+      cy.visit("/inside");
     });
 
     it("should navigate to login page when trying to access favorite tab", () => {
@@ -95,7 +97,7 @@ describe("App", () => {
 
     it("should handle dark mode toggle and logout in settings", () => {
       // Navigate to settings page
-      cy.visit("/second-page/settings");
+      cy.visit("/inside/settings");
 
       // Check initial theme (assuming light mode is default)
       cy.get("html").should("not.have.class", "dark");
