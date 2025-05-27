@@ -189,4 +189,4 @@ Each state is managed using NgRx with the following features:
   - Efficient state management
   - Optimized bundle size
   - Fast page loads
-```
+
