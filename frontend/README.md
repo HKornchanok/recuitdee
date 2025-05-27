@@ -71,11 +71,8 @@ The project uses Cypress for end-to-end testing. E2E tests are located in the `e
 To run E2E tests:
 
 ```sh
-# Run E2E tests in headless mode
 npm run e2e
-
-# Run E2E tests with UI
-npm run e2e:open
+```
 
 Key test scenarios covered:
 - Landing page welcome message
